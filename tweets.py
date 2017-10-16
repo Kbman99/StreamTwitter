@@ -31,7 +31,7 @@ class TwitterHandler:
             self.played_songs.append(song)
             self.current_song = song
             self.newest_tweet = self.parse_tweet(tweet_context)
-            wh.send_msg('!play ' + song)
+            wh.send_msg('!play {} {}'.format(song, self.newest_tweet["user"]))
 
     def song_already_played(self, song):
         try:
