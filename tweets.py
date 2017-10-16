@@ -25,12 +25,15 @@ class TwitterHandler:
         tweet_context = json.loads(data)
         self.tweets.append(tweet_context)
         song = self.parse_string(tweet_context["text"])
+        print("Tweet text: {}".format(song))
         if self.song_already_played(song):
             print("This song has recently been requested, please wait before requesting again")
         else:
             self.played_songs.append(song)
             self.current_song = song
             self.newest_tweet = self.parse_tweet(tweet_context)
+            print("Requester: {}".format(self.newest_tweet["user"]))
+            print("------------------------------------")
             wh.send_msg('!play {} {}'.format(song, self.newest_tweet["user"]))
 
     def song_already_played(self, song):

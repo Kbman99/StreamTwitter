@@ -8,6 +8,7 @@ class MyStreamListener(tweepy.StreamListener):
         self.handler = handler
 
     def on_data(self, data):
+        print("New tweet received...")
         self.handler.process_tweet(data)
         return True
 
@@ -22,4 +23,6 @@ def setup_streamer(handler):
     auth.set_access_token(keys["access_token"], keys["access_token_secret"])
 
     my_stream = tweepy.Stream(auth=auth, listener=my_stream_listener)
+    print("Setup complete.")
+    print("---------------------------")
     my_stream.filter(track=['@PlayMeThisSong'], async=True)
